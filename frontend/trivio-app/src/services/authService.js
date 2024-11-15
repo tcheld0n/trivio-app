@@ -1,6 +1,6 @@
 // src/services/authService.js
 
-const API_URL = 'http://localhost:5001';
+const API_URL = 'http://127.0.0.1:5001';
 
 export const register = async (username, password) => {
     const response = await fetch(`${API_URL}/register`, {

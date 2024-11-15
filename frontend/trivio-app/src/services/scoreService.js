@@ -1,6 +1,6 @@
 // src/services/scoreService.js
 
-const API_URL = 'http://localhost:5003';
+const API_URL = 'http://127.0.0.1:5003';
 
 export const submitScore = async (userId, score) => {
     const response = await fetch(`${API_URL}/score`, {

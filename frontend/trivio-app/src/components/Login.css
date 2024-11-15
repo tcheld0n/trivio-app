@@ -1,0 +1,128 @@
+/* Estrutura geral */
+.login-container {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.login-image-section {
+    flex: 1;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-image {
+    width: 70%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.login-form-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Centraliza horizontalmente */
+}
+
+/* Configura a largura dos elementos do formulário em 1/4 da largura da tela */
+.form-element {
+    width: 25vw;
+    /* 1/4 da largura da tela */
+    max-width: 400px;
+    /* Limita o máximo para uma largura agradável em telas maiores */
+    margin-bottom: 15px;
+}
+
+.login-form-section h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.login-form-section p {
+    color: #777;
+}
+
+.login-form-section a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.social-login {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.social-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.social-button.google {
+    background-color: #4285F4;
+    color: white;
+}
+
+.social-button.apple {
+    background-color: #333;
+    color: white;
+}
+
+.divider {
+    text-align: center;
+    color: #aaa;
+    margin: 20px 0;
+}
+
+.divider span {
+    padding: 0 10px;
+    background-color: #fff;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group label {
+    align-self: flex-start;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}

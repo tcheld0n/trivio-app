@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 app.config['SECRET_KEY'] = 'secretkey'  # Altere para uma chave secreta em produção
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -14,7 +17,8 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(120), nullable=False)
 
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -35,8 +39,23 @@ def login():
     user = User.query.filter_by(username=data['username']).first()
     if user and check_password_hash(user.password_hash, data['password']):
         session['user_id'] = user.id
-        return jsonify({"message": "Logged in successfully"}), 200
+        return jsonify({"message": "Logged in successfully", "user_id": user.id}), 200
     return jsonify({"message": "Invalid credentials"}), 401
+
+
+# @app.route('/login', methods=['POST'])
+# def login():
+#     data = request.get_json()
+#     print("Dados recebidos no login:", data)
+#     user = User.query.filter_by(username=data['username']).first()
+#     if user:
+#         print("Usuário encontrado:", user.username)
+#     if user and check_password_hash(user.password_hash, data['password']):
+#         session['user_id'] = user.id
+#         return jsonify({"message": "Logged in successfully"}), 200
+#     else:
+#         print("Falha no login: credenciais inválidas")
+#     return jsonify({"message": "Invalid credentials"}), 401
 
 @app.route('/session', methods=['GET'])
 def validate_session():

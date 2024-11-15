@@ -6,8 +6,11 @@ app = Flask(__name__)
 @app.route('/questions', methods=['GET'])
 def get_questions():
     difficulty = request.args.get('difficulty', 'easy')
+    # Faz a requisição para a OTDB
     response = requests.get(f"https://opentdb.com/api.php?amount=10&difficulty={difficulty}&type=multiple")
     questions = response.json().get("results", [])
+    
+    # Formata as perguntas para incluir 'question', 'options' e 'answer'
     formatted_questions = [
         {
             "question": q["question"],

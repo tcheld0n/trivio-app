@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+
+import React, { useState, useEffect } from 'react';
+import Login from './components/Login';
+import TriviaGame from './components/TriviaGame';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [userId, setUserId] = useState(() => localStorage.getItem('userId'));
+
+    useEffect(() => {
+        console.log("userId atualizado:", userId); // Verifica se o estado está sendo alterado
+        if (userId) {
+            localStorage.setItem('userId', userId);
+        }
+    }, [userId]);
+
+    const handleLogout = () => {
+        setUserId(null);
+        localStorage.removeItem('userId');
+    };
+
+    return (
+        <div className="App">
+            {userId ? (
+                <TriviaGame userId={userId} onLogout={handleLogout} />
+            ) : (
+                <Login onLogin={(id) => setUserId(id)} />
+            )}
+        </div>
+    );
 }
 
 export default App;
